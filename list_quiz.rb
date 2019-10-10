@@ -1,9 +1,8 @@
 # three_even?
 def three_even?(list)
-  count = 0
-  (list.size - 2).times do |i|
+  (list.size - 2).times do |i| # I used to have a count variable but I realized it was unnecessary.
     if list[i] % 2 == 0
-      if list[i + 1] %2 == 0 || list[i + 2] == 0
+      if list[i + 1] % 2 == 0 && list[i + 2] % 2 == 0 # I forgot to put the && sign and I didn't put the % 2 for the second condition.
         return true
       else
         return false
@@ -23,11 +22,11 @@ puts three_even?([]) # false
 # bigger_two
 def bigger_two(list1, list2)
   if (list1[0] + list1[1]) > (list2[0] + list2[1])
-    return "[#{list1[0]}, #{list1[1]}]" # I solved it like this because otherwise, it would just print out each number individually
+    return "#{list1}" # Before, I put each of the lists in the array in a weird way, but then I realized I overcomplicated it. So that's why I changed it to "#{listx}" from "[#{listx[0]}, #{listx[1]}]".
   elsif (list1[0] + list1[1]) < (list2[0] + list2[1])
-    return "[#{list2[0]}, #{list2[1]}]"
+    return "#{list2}"
   elsif (list1[0] + list1[1]) == (list2[0] + list2[1])
-    return "[#{list1[0]}, #{list1[1]}]"
+    return "#{list1}"
   end
 end
 
@@ -38,30 +37,13 @@ puts bigger_two([5, 6], [2, 2]) # [5, 6]
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # series_up
 def series_up(n)
-  array = []
-  g1 = [1]
-  g2 = [1, 2]
-  g3 = [1, 2, 3]
-  g4 = []
-  if n == 1
-    return "#{g1}" # Looking back at my bigger_two code, I realized I was being stupid so I decided not to do that for these arrays
+  array = [] # We used this because we need to push in our answer into an array.
+  n.times do |i| # We had to use nested loops because only one loop couldn't accomplish the task we needed.
+    (i + 1).times do |m| # We had to make it (i + 1) because otherwise, i would start at 0 and we don't want that to happen.
+      array.push(m + 1) # Again, we had to make it (m + 1) because it would start at zero and that messes up the pattern.
+    end
   end
-  if n == 2
-    pattern = g1 + g2
-    array.push(pattern)
-    return "#{array}"
-  end
-  if n == 3
-    pattern = g1 + g2 + g3
-    array.push(pattern)
-    return "#{array}"
-  end
-  if n > 3
-    g4.push(n)
-    pattern = g1 + g2 + ((g3)*(n - 2)) + g4
-    array.push(pattern)
-    return "#{array}"
-  end
+  return "#{array}"
 end
 
 puts series_up(1) # [1]
